@@ -21,6 +21,5 @@ if (persistedTodosString) {
   }
 }
 
-
 const store = createStore(reducer, preLoadedState, composedEnhancer)
 export default store
