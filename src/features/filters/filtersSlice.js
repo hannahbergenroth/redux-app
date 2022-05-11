@@ -5,7 +5,7 @@ export const StatusFilters = {
 }
 
 const initialState = {
-  status: 'All',
+  status: 'all',
   colors: []
 }
 
@@ -41,5 +41,12 @@ export default function filtersReducer(state = initialState, action) {
     }
     default:
       return state
+  }
+}
+
+export const colorFilterChanged = (color, changeType) => {
+  return {
+    type: 'filters/colorFilterChanged',
+    payload: { color, changeType }
   }
 }

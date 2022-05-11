@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as TimesSolid } from './times-solid.svg'
 
 import { availableColors, capitalize } from '../filters/colors'
-
-const selectTodoById = (state, todoId) => {
-  return state.todos.find((todo) => todo.id === todoId)
-}
+import {
+  todoColorSelected,
+  todoDeleted,
+  todoToggled,
+  selectTodoById,
+} from './todosSlice'
 
 const TodoListItem = ({ id }) => {
   const todo = useSelector((state) => selectTodoById(state, id))
@@ -16,19 +18,16 @@ const TodoListItem = ({ id }) => {
   const dispatch = useDispatch()
 
   const handleCompletedChanged = () => {
-    dispatch({ type: 'todos/todoToggled', payload: todo.id })
+    dispatch(todoToggled(todo.id))
   }
 
   const handleColorChanged = (e) => {
     const color = e.target.value
-    dispatch({
-      type: 'todos/colorSelected',
-      payload: { todoId: todo.id, color },
-    })
+    dispatch(todoColorSelected(todo.id, color))
   }
 
   const onDelete = () => {
-    dispatch({ type: 'todos/todoDeleted', payload: todo.id })
+    dispatch(todoDeleted(todo.id))
   }
 
   const colorOptions = availableColors.map((c) => (

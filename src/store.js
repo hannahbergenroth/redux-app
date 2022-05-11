@@ -1,4 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import reducer from "./reducer";
 import { print1, print2, print3, loggerMiddleware } from './exampleAddons/middleware'
@@ -8,8 +9,8 @@ import {
 } from './exampleAddons/enhancers'
 
 const composedEnhancer = composeWithDevTools(
-  applyMiddleware(print1, print2, print3, loggerMiddleware),
-  compose(sayHiOnDispatch, includeMeaningOfLife)
+  applyMiddleware(thunkMiddleware),
+  // compose(sayHiOnDispatch, includeMeaningOfLife)
 )
 
 let preLoadedState
